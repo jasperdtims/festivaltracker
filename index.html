@@ -152,25 +152,74 @@
   .day-tab{ flex-shrink:0; background: transparent; border:1.5px solid var(--line); color: var(--muted); font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; white-space:nowrap; }
   .day-tab.active{ background: var(--violet); border-color: var(--violet); color: var(--violet-ink); }
 
-  .filter-row{ display:flex; gap:8px; margin-bottom: 14px; }
-  .filter-row select, .filter-row input{
+  .filter-row{ display:flex; gap:8px; margin-bottom: 14px; position:relative; }
+  .filter-row input{
     background: var(--surface); border:1.5px solid var(--line); color: var(--text);
     border-radius: 999px; padding: 10px 16px; font-size: 14px; font-family: var(--font-body);
   }
-  .filter-row select{ flex:1; min-width:0; -webkit-appearance:none; appearance:none; }
   .filter-row input{ flex:1.4; min-width:0; }
   .filter-row input::placeholder{ color: var(--muted-dim); }
+  .stage-filter-wrap{ position:relative; flex:1; min-width:0; }
+  .stage-filter-btn{
+    width:100%; background: var(--surface); border:1.5px solid var(--line); color: var(--text);
+    border-radius: 999px; padding: 10px 16px; font-size: 14px; font-family: var(--font-body);
+    text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .stage-filter-btn.active{ border-color: var(--violet); color: var(--violet); }
+  .stage-filter-panel{
+    display:none; position:absolute; top:calc(100% + 6px); left:0; z-index:30;
+    background: var(--surface-raised); border:1.5px solid var(--line); border-radius:14px;
+    padding:8px; min-width:200px; max-height:280px; overflow-y:auto;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+  .stage-filter-panel.open{ display:block; }
+  .stage-filter-option{ display:flex; align-items:center; gap:10px; padding:8px 6px; border-radius:9px; font-size:14px; color: var(--text); }
+  .stage-filter-option:active{ background: rgba(255,255,255,0.06); }
+  .stage-filter-option input{ width:18px; height:18px; accent-color: var(--violet); flex-shrink:0; }
+  .stage-filter-divider{ height:1px; background: var(--line-soft); margin:4px 2px; }
+  .fav-filter-btn{ flex-shrink:0; width:44px; border-radius:14px; background: var(--surface); border:1.5px solid var(--line); color: var(--muted-dim); font-size:17px; display:flex; align-items:center; justify-content:center; }
+  .fav-filter-btn.active{ background: var(--violet); border-color: var(--violet); color: var(--violet-ink); }
+
+  .live-tag{ background: var(--accent); color: var(--accent-ink); font-size:9px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; padding:2px 7px; border-radius: 8px; margin-left:6px; vertical-align:1px; }
+
+  /* ---------- timetable grid (sidescroller) ---------- */
+  .tt-toolbar{ position: sticky; top:0; z-index:20; background: var(--bg); padding-top:2px; }
+  .tt-title-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .tt-view-toggle{ display:flex; gap:4px; background: var(--surface); border:1.5px solid var(--line); border-radius:12px; padding:3px; }
+  .tt-view-btn{ width:34px; height:30px; border-radius:9px; background:transparent; border:none; color: var(--muted); font-size:15px; display:flex; align-items:center; justify-content:center; }
+  .tt-view-btn.active{ background: var(--violet); color: var(--violet-ink); }
 
   .event-card{ background: var(--surface); border:1.5px solid var(--line); border-radius: 20px; padding: 14px 14px; margin-bottom: 10px; display:flex; align-items:center; gap:12px; }
-  .event-card.is-fav{ border-color: rgba(255,255,255,0.85); background: var(--surface-raised); }
+  .event-card.is-fav{ border-color: var(--violet); background: rgba(139,107,255,0.12); }
   .event-card .time-col{ font-family: var(--font-mono); font-size:12px; color: var(--muted); width: 62px; flex-shrink:0; line-height:1.4; font-weight:600; }
   .event-card .time-col .end{ color: var(--muted-dim); font-weight:400; }
   .event-card .info{ flex:1; min-width:0; }
-  .event-card .artist{ font-size:15px; font-weight:700; }
+  .event-card .artist{ font-size:16.5px; font-weight:700; }
   .event-card .stage{ font-size:12px; color: var(--muted); margin-top:1px; }
-  .star-toggle{ width:38px;height:38px; border-radius:12px; background: transparent; border:1.5px solid var(--line); font-size:17px; display:flex;align-items:center;justify-content:center; flex-shrink:0; color: var(--muted-dim); }
-  .star-toggle.active{ color: var(--gold); border-color: rgba(255,207,107,0.5); }
-  .live-tag{ background: var(--accent); color: var(--accent-ink); font-size:9px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; padding:2px 7px; border-radius: 8px; margin-left:6px; vertical-align:1px; }
+  .event-card .star-toggle{ width:38px;height:38px; border-radius:12px; background: transparent; border:1.5px solid var(--line); font-size:17px; display:flex;align-items:center;justify-content:center; flex-shrink:0; color: var(--muted-dim); }
+  .event-card .star-toggle.active{ color: var(--violet); border-color: rgba(139,107,255,0.5); }
+  .event-card .live-tag{ background: var(--accent); color: var(--accent-ink); font-size:9px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; padding:2px 7px; border-radius: 8px; margin-left:6px; vertical-align:1px; }
+  .tt-day-header{ font-family: var(--font-mono); font-size:12px; color: var(--muted); margin: 4px 0 10px; }
+  .tt-scroll{ overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 0 24px; }
+  .tt-scroll::-webkit-scrollbar{ height:6px; }
+  .tt-scroll::-webkit-scrollbar-thumb{ background: var(--line); border-radius:4px; }
+  .tt-inner{ position:relative; }
+  .tt-corner{ position:sticky; left:0; top:0; z-index:8; background: var(--bg); }
+  .tt-stagecol{ position:sticky; left:0; z-index:6; background: var(--bg); }
+  .tt-stage-name{ display:flex; align-items:center; padding:0 10px; font-family: var(--font-display); font-size:11px; font-weight:700; color: var(--text); border-bottom:1px solid var(--line-soft); border-right:1px solid var(--line); box-sizing:border-box; line-height:1.2; }
+  .tt-hour-label{ position:absolute; top:0; display:flex; align-items:center; padding-left:8px; box-sizing:border-box; font-family: var(--font-mono); font-size:11px; color: var(--muted); border-left:1px solid var(--line-soft); border-bottom:1px solid var(--line); }
+  .tt-day-label{ position:absolute; top:0; display:flex; align-items:center; padding-left:8px; box-sizing:border-box; font-family: var(--font-display); font-size:12px; font-weight:800; color: var(--text); border-bottom:1px solid var(--line); }
+  .tt-day-divider{ position:absolute; top:0; width:2px; background: var(--violet); z-index:3; }
+  .tt-row-bg{ position:absolute; left:0; border-bottom:1px solid var(--line-soft); box-sizing:border-box; }
+  .tt-hour-line{ position:absolute; top:0; width:1px; background: var(--line-soft); }
+  .tt-event{ position:absolute; background: var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:5px 7px; box-sizing:border-box; overflow:hidden; display:flex; flex-direction:column; justify-content:center; gap:1px; }
+  .tt-event.is-fav{ border-color: var(--violet); background: rgba(139,107,255,0.16); }
+  .tt-event.is-live{ border-color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent) inset; }
+  .tt-ev-time{ font-family: var(--font-mono); font-size:9px; color: var(--muted-dim); white-space:nowrap; overflow:hidden; }
+  .tt-ev-artist{ font-family: var(--font-body); font-size:12.1px; font-weight:700; color: var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tt-fav-badge{ position:absolute; top:2px; right:4px; font-size:9px; color: var(--violet); }
+  .tt-now-line{ position:absolute; top:0; width:2px; background: var(--accent); z-index:5; }
+  .tt-now-dot{ position:absolute; top:-6px; left:50%; transform: translateX(-50%); width:8px; height:8px; border-radius:50%; background: var(--accent); }
 
   /* ---------- map screen ---------- */
   .map-toolbar{ display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:12px; }
@@ -416,13 +465,28 @@
 
     <!-- TIMETABLE SCREEN -->
     <section class="screen" id="screen-timetable">
-      <div class="section-title">Timetable</div>
-      <div class="day-tabs" id="day-tabs"></div>
-      <div class="filter-row">
-        <select id="stage-filter"></select>
-        <input type="text" id="artist-search" placeholder="Zoek artiest...">
+      <div class="tt-toolbar">
+        <div class="tt-title-row">
+          <div class="section-title">Timetable</div>
+          <div class="tt-view-toggle" id="tt-view-toggle">
+            <button class="tt-view-btn active" data-view="grid" title="Schuifweergave">⬌</button>
+            <button class="tt-view-btn" data-view="list" title="Lijstweergave">☰</button>
+          </div>
+        </div>
+        <div class="day-tabs" id="day-tabs"></div>
+        <div class="filter-row">
+          <div class="stage-filter-wrap">
+            <button id="stage-filter-btn" class="stage-filter-btn" type="button">Alle podia</button>
+            <div class="stage-filter-panel" id="stage-filter-panel"></div>
+          </div>
+          <input type="text" id="artist-search" placeholder="Zoek artiest...">
+          <button id="fav-filter-btn" class="fav-filter-btn" title="Toon alleen favorieten">★</button>
+        </div>
       </div>
-      <div id="event-list"></div>
+      <div class="tt-scroll" id="tt-scroll">
+        <div class="tt-inner" id="tt-inner"></div>
+      </div>
+      <div id="event-list" style="display:none;"></div>
       <div class="empty-state" id="event-empty" style="display:none;">Geen acts gevonden voor dit filter.</div>
     </section>
 
@@ -507,6 +571,16 @@
   var STAGES = ["Wildlive","Vuurtorenstrand","Kas","Eiland","Strand","Helling","BUDXLodge","Bamboebos","Duinpan","Studio De Baan","Achtertuin"];
 
   var DAY_LABELS = ["9 juli","10 juli","11 juli","12 juli"];
+  var DAY_NAMES = ["Donderdag","Vrijdag","Zaterdag","Zondag"];
+
+  // Each festival day runs 12:00 -> 08:00 the next calendar morning.
+  var DAY_START_MAP = {
+    "9 juli": new Date(2026,6,9,12,0,0),
+    "10 juli": new Date(2026,6,10,12,0,0),
+    "11 juli": new Date(2026,6,11,12,0,0),
+    "12 juli": new Date(2026,6,12,12,0,0)
+  };
+  var TT_GRID_HOURS = 20;
 
   // y, m(0-indexed), d, h, mi
   function D(y,m,d,h,mi){ return new Date(y,m,d,h,mi,0); }
@@ -519,7 +593,7 @@
 
   var EVENTS = [];
 
-  // ---- Donderdag 9 juli 2026 ----
+  // ---- Donderdag 9 juli 2026 (festival day: 12:00 - 08:00) ----
   (function(){
     var dl = "9 juli";
 
@@ -536,7 +610,7 @@
 
   })();
 
-  // ---- Vrijdag 10 juli 2026 ----
+  // ---- Vrijdag 10 juli 2026 (festival day: 12:00 - 08:00) ----
   (function(){
     var dl = "10 juli";
 
@@ -552,7 +626,7 @@
     EVENTS.push(ev("Raffie De Driver XXL","Wildlive",dl, D(2026,6,10,23,0), D(2026,6,11,0,0)));
 
     EVENTS.push(ev("De Spot","Kas",dl, D(2026,6,10,12,0), D(2026,6,11,0,0)));
-    EVENTS.push(ev("Ame","Kas",dl, D(2026,6,10,0,0), D(2026,6,10,5,0)));
+    EVENTS.push(ev("Ame","Kas",dl, D(2026,6,11,0,0), D(2026,6,11,5,0)));
 
     EVENTS.push(ev("Nellzz","Strand",dl, D(2026,6,10,12,0), D(2026,6,10,15,0)));
     EVENTS.push(ev("Yusu Selectors","Strand",dl, D(2026,6,10,15,0), D(2026,6,10,17,0)));
@@ -560,16 +634,16 @@
     EVENTS.push(ev("Bokoesam & DJ Steesko (Dancehall Set)","Strand",dl, D(2026,6,10,19,0), D(2026,6,10,21,0)));
     EVENTS.push(ev("DJ Polo","Strand",dl, D(2026,6,10,21,0), D(2026,6,10,23,0)));
     EVENTS.push(ev("Lamsi","Strand",dl, D(2026,6,10,23,0), D(2026,6,11,1,0)));
-    EVENTS.push(ev("Riria","Strand",dl, D(2026,6,10,1,0), D(2026,6,10,3,0)));
-    EVENTS.push(ev("Eycee & Passion Deez","Strand",dl, D(2026,6,10,3,0), D(2026,6,10,5,0)));
+    EVENTS.push(ev("Riria","Strand",dl, D(2026,6,11,1,0), D(2026,6,11,3,0)));
+    EVENTS.push(ev("Eycee & Passion Deez","Strand",dl, D(2026,6,11,3,0), D(2026,6,11,5,0)));
 
     EVENTS.push(ev("Dj After","Helling",dl, D(2026,6,10,15,0), D(2026,6,10,18,0)));
     EVENTS.push(ev("DAWS","Helling",dl, D(2026,6,10,18,0), D(2026,6,10,20,30)));
     EVENTS.push(ev("Byron Yeates LIVE","Helling",dl, D(2026,6,10,20,30), D(2026,6,10,21,30)));
     EVENTS.push(ev("Atrip & Lammer","Helling",dl, D(2026,6,10,21,30), D(2026,6,11,0,30)));
-    EVENTS.push(ev("VTSS","Helling",dl, D(2026,6,10,0,30), D(2026,6,10,2,30)));
-    EVENTS.push(ev("Thelma","Helling",dl, D(2026,6,10,2,30), D(2026,6,10,5,0)));
-    EVENTS.push(ev("Newtone","Helling",dl, D(2026,6,10,5,0), D(2026,6,10,8,0)));
+    EVENTS.push(ev("VTSS","Helling",dl, D(2026,6,11,0,30), D(2026,6,11,2,30)));
+    EVENTS.push(ev("Thelma","Helling",dl, D(2026,6,11,2,30), D(2026,6,11,5,0)));
+    EVENTS.push(ev("Newtone","Helling",dl, D(2026,6,11,5,0), D(2026,6,11,8,0)));
 
     EVENTS.push(ev("Nerds With Acid","BUDXLodge",dl, D(2026,6,10,12,0), D(2026,6,10,15,0)));
     EVENTS.push(ev("Gioray LIVE","BUDXLodge",dl, D(2026,6,10,15,0), D(2026,6,10,16,0)));
@@ -577,24 +651,24 @@
     EVENTS.push(ev("Alberta Balsam LIVE","BUDXLodge",dl, D(2026,6,10,18,0), D(2026,6,10,19,0)));
     EVENTS.push(ev("Lazergazer","BUDXLodge",dl, D(2026,6,10,19,0), D(2026,6,10,21,30)));
     EVENTS.push(ev("Jasmín","BUDXLodge",dl, D(2026,6,10,21,30), D(2026,6,11,0,0)));
-    EVENTS.push(ev("Gyrofield","BUDXLodge",dl, D(2026,6,10,0,0), D(2026,6,10,2,0)));
-    EVENTS.push(ev("Sully","BUDXLodge",dl, D(2026,6,10,2,0), D(2026,6,10,4,0)));
-    EVENTS.push(ev("Dirtydms","BUDXLodge",dl, D(2026,6,10,4,0), D(2026,6,10,6,0)));
+    EVENTS.push(ev("Gyrofield","BUDXLodge",dl, D(2026,6,11,0,0), D(2026,6,11,2,0)));
+    EVENTS.push(ev("Sully","BUDXLodge",dl, D(2026,6,11,2,0), D(2026,6,11,4,0)));
+    EVENTS.push(ev("Dirtydms","BUDXLodge",dl, D(2026,6,11,4,0), D(2026,6,11,6,0)));
 
     EVENTS.push(ev("Estrella","Bamboebos",dl, D(2026,6,10,14,0), D(2026,6,10,17,0)));
     EVENTS.push(ev("Malin Genie","Bamboebos",dl, D(2026,6,10,17,0), D(2026,6,10,19,30)));
     EVENTS.push(ev("Ogazon","Bamboebos",dl, D(2026,6,10,19,30), D(2026,6,10,22,0)));
     EVENTS.push(ev("Katia Curie","Bamboebos",dl, D(2026,6,10,22,0), D(2026,6,11,0,30)));
-    EVENTS.push(ev("Dj Sweet6teen","Bamboebos",dl, D(2026,6,10,0,30), D(2026,6,10,3,0)));
-    EVENTS.push(ev("Priori","Bamboebos",dl, D(2026,6,10,3,0), D(2026,6,10,6,0)));
+    EVENTS.push(ev("Dj Sweet6teen","Bamboebos",dl, D(2026,6,11,0,30), D(2026,6,11,3,0)));
+    EVENTS.push(ev("Priori","Bamboebos",dl, D(2026,6,11,3,0), D(2026,6,11,6,0)));
 
     EVENTS.push(ev("Bebe Bad","Duinpan",dl, D(2026,6,10,13,0), D(2026,6,10,16,0)));
     EVENTS.push(ev("re:ni","Duinpan",dl, D(2026,6,10,16,0), D(2026,6,10,18,30)));
     EVENTS.push(ev("Roni","Duinpan",dl, D(2026,6,10,18,30), D(2026,6,10,20,30)));
     EVENTS.push(ev("Twiena","Duinpan",dl, D(2026,6,10,20,30), D(2026,6,10,22,30)));
     EVENTS.push(ev("Ogazon & Rene Wise","Duinpan",dl, D(2026,6,10,22,30), D(2026,6,11,1,30)));
-    EVENTS.push(ev("Blawan","Duinpan",dl, D(2026,6,10,1,30), D(2026,6,10,3,30)));
-    EVENTS.push(ev("Rosati","Duinpan",dl, D(2026,6,10,3,30), D(2026,6,10,6,0)));
+    EVENTS.push(ev("Blawan","Duinpan",dl, D(2026,6,11,1,30), D(2026,6,11,3,30)));
+    EVENTS.push(ev("Rosati","Duinpan",dl, D(2026,6,11,3,30), D(2026,6,11,6,0)));
 
     EVENTS.push(ev("NK Inkomen","Studio De Baan",dl, D(2026,6,10,14,0), D(2026,6,10,16,0)));
     EVENTS.push(ev("Lézard","Studio De Baan",dl, D(2026,6,10,16,0), D(2026,6,10,17,0)));
@@ -612,12 +686,12 @@
     EVENTS.push(ev("Kirollus","Achtertuin",dl, D(2026,6,10,17,0), D(2026,6,10,20,0)));
     EVENTS.push(ev("Ajuma","Achtertuin",dl, D(2026,6,10,20,0), D(2026,6,10,22,0)));
     EVENTS.push(ev("Bradley Zero","Achtertuin",dl, D(2026,6,10,22,0), D(2026,6,11,0,0)));
-    EVENTS.push(ev("Danilo Plessow","Achtertuin",dl, D(2026,6,10,0,0), D(2026,6,10,2,30)));
-    EVENTS.push(ev("Vasco","Achtertuin",dl, D(2026,6,10,2,30), D(2026,6,10,5,0)));
+    EVENTS.push(ev("Danilo Plessow","Achtertuin",dl, D(2026,6,11,0,0), D(2026,6,11,2,30)));
+    EVENTS.push(ev("Vasco","Achtertuin",dl, D(2026,6,11,2,30), D(2026,6,11,5,0)));
 
   })();
 
-  // ---- Zaterdag 11 juli 2026 ----
+  // ---- Zaterdag 11 juli 2026 (festival day: 12:00 - 08:00) ----
   (function(){
     var dl = "11 juli";
 
@@ -634,46 +708,46 @@
     EVENTS.push(ev("Mylan","Wildlive",dl, D(2026,6,11,22,0), D(2026,6,11,23,0)));
     EVENTS.push(ev("Jersey","Wildlive",dl, D(2026,6,11,23,0), D(2026,6,12,0,0)));
 
-    EVENTS.push(ev("Acid Pauli","Kas",dl, D(2026,6,11,0,0), D(2026,6,11,5,0)));
+    EVENTS.push(ev("Acid Pauli","Kas",dl, D(2026,6,12,0,0), D(2026,6,12,5,0)));
 
     EVENTS.push(ev("Ism Schism Soundsism","Strand",dl, D(2026,6,11,12,0), D(2026,6,11,15,0)));
     EVENTS.push(ev("Mr. Scruff & MC Kwasi","Strand",dl, D(2026,6,11,15,0), D(2026,6,11,19,0)));
     EVENTS.push(ev("Tash Lc","Strand",dl, D(2026,6,11,19,0), D(2026,6,11,21,0)));
     EVENTS.push(ev("State Offf","Strand",dl, D(2026,6,11,21,0), D(2026,6,11,23,0)));
     EVENTS.push(ev("Jyoty","Strand",dl, D(2026,6,11,23,0), D(2026,6,12,1,0)));
-    EVENTS.push(ev("Champion","Strand",dl, D(2026,6,11,1,0), D(2026,6,11,2,30)));
-    EVENTS.push(ev("Sam Girling","Strand",dl, D(2026,6,11,2,30), D(2026,6,11,5,0)));
+    EVENTS.push(ev("Champion","Strand",dl, D(2026,6,12,1,0), D(2026,6,12,2,30)));
+    EVENTS.push(ev("Sam Girling","Strand",dl, D(2026,6,12,2,30), D(2026,6,12,5,0)));
 
     EVENTS.push(ev("Job Jobse","Helling",dl, D(2026,6,11,15,0), D(2026,6,11,19,0)));
     EVENTS.push(ev("Moxes & Phia","Helling",dl, D(2026,6,11,19,0), D(2026,6,11,21,30)));
     EVENTS.push(ev("Avalon Emerson","Helling",dl, D(2026,6,11,21,30), D(2026,6,12,0,0)));
-    EVENTS.push(ev("Milion","Helling",dl, D(2026,6,11,0,0), D(2026,6,11,2,30)));
-    EVENTS.push(ev("X Club.","Helling",dl, D(2026,6,11,2,30), D(2026,6,11,5,0)));
-    EVENTS.push(ev("Swim","Helling",dl, D(2026,6,11,5,0), D(2026,6,11,8,0)));
+    EVENTS.push(ev("Milion","Helling",dl, D(2026,6,12,0,0), D(2026,6,12,2,30)));
+    EVENTS.push(ev("X Club.","Helling",dl, D(2026,6,12,2,30), D(2026,6,12,5,0)));
+    EVENTS.push(ev("Swim","Helling",dl, D(2026,6,12,5,0), D(2026,6,12,8,0)));
 
     EVENTS.push(ev("Etape","BUDXLodge",dl, D(2026,6,11,12,0), D(2026,6,11,16,0)));
     EVENTS.push(ev("Mammo","BUDXLodge",dl, D(2026,6,11,16,0), D(2026,6,11,17,0)));
     EVENTS.push(ev("Hervé & Xiaolin","BUDXLodge",dl, D(2026,6,11,17,0), D(2026,6,11,20,0)));
     EVENTS.push(ev("Nthng","BUDXLodge",dl, D(2026,6,11,20,0), D(2026,6,11,22,30)));
     EVENTS.push(ev("Torus","BUDXLodge",dl, D(2026,6,11,22,30), D(2026,6,12,0,30)));
-    EVENTS.push(ev("Hysteria Dj's","BUDXLodge",dl, D(2026,6,11,0,30), D(2026,6,11,2,0)));
-    EVENTS.push(ev("Promo","BUDXLodge",dl, D(2026,6,11,2,0), D(2026,6,11,3,30)));
-    EVENTS.push(ev("Hyperlili","BUDXLodge",dl, D(2026,6,11,3,30), D(2026,6,11,6,0)));
+    EVENTS.push(ev("Hysteria Dj's","BUDXLodge",dl, D(2026,6,12,0,30), D(2026,6,12,2,0)));
+    EVENTS.push(ev("Promo","BUDXLodge",dl, D(2026,6,12,2,0), D(2026,6,12,3,30)));
+    EVENTS.push(ev("Hyperlili","BUDXLodge",dl, D(2026,6,12,3,30), D(2026,6,12,6,0)));
 
     EVENTS.push(ev("Idilay","Bamboebos",dl, D(2026,6,11,14,0), D(2026,6,11,17,0)));
     EVENTS.push(ev("Mountain People","Bamboebos",dl, D(2026,6,11,17,0), D(2026,6,11,19,30)));
     EVENTS.push(ev("Plo Man","Bamboebos",dl, D(2026,6,11,19,30), D(2026,6,11,22,0)));
     EVENTS.push(ev("Raresh","Bamboebos",dl, D(2026,6,11,22,0), D(2026,6,12,1,0)));
-    EVENTS.push(ev("Tini","Bamboebos",dl, D(2026,6,11,1,0), D(2026,6,11,3,30)));
-    EVENTS.push(ev("Samuel Deep","Bamboebos",dl, D(2026,6,11,3,30), D(2026,6,11,6,0)));
+    EVENTS.push(ev("Tini","Bamboebos",dl, D(2026,6,12,1,0), D(2026,6,12,3,30)));
+    EVENTS.push(ev("Samuel Deep","Bamboebos",dl, D(2026,6,12,3,30), D(2026,6,12,6,0)));
 
     EVENTS.push(ev("Alec Dienaar","Duinpan",dl, D(2026,6,11,13,0), D(2026,6,11,16,0)));
     EVENTS.push(ev("Dj Fuckoff","Duinpan",dl, D(2026,6,11,16,0), D(2026,6,11,18,30)));
     EVENTS.push(ev("MCR-T","Duinpan",dl, D(2026,6,11,18,30), D(2026,6,11,20,30)));
     EVENTS.push(ev("U.r.trax","Duinpan",dl, D(2026,6,11,20,30), D(2026,6,11,23,0)));
     EVENTS.push(ev("Delano Legito","Duinpan",dl, D(2026,6,11,23,0), D(2026,6,12,1,0)));
-    EVENTS.push(ev("Rødhåd","Duinpan",dl, D(2026,6,11,1,0), D(2026,6,11,3,30)));
-    EVENTS.push(ev("Nadia Struiwigh","Duinpan",dl, D(2026,6,11,3,30), D(2026,6,11,6,0)));
+    EVENTS.push(ev("Rødhåd","Duinpan",dl, D(2026,6,12,1,0), D(2026,6,12,3,30)));
+    EVENTS.push(ev("Nadia Struiwigh","Duinpan",dl, D(2026,6,12,3,30), D(2026,6,12,6,0)));
 
     EVENTS.push(ev("De Gestampte Meisjes","Studio De Baan",dl, D(2026,6,11,13,0), D(2026,6,11,14,45)));
     EVENTS.push(ev("MOK The One Man Band","Studio De Baan",dl, D(2026,6,11,15,0), D(2026,6,11,16,0)));
@@ -690,12 +764,12 @@
     EVENTS.push(ev("Doppelgang","Achtertuin",dl, D(2026,6,11,17,0), D(2026,6,11,19,30)));
     EVENTS.push(ev("DJ Subaru","Achtertuin",dl, D(2026,6,11,19,30), D(2026,6,11,22,0)));
     EVENTS.push(ev("Sound Metaphors DJ’s","Achtertuin",dl, D(2026,6,11,22,0), D(2026,6,12,0,30)));
-    EVENTS.push(ev("Erol Alkan","Achtertuin",dl, D(2026,6,11,0,30), D(2026,6,11,3,0)));
-    EVENTS.push(ev("I-f","Achtertuin",dl, D(2026,6,11,3,0), D(2026,6,11,5,0)));
+    EVENTS.push(ev("Erol Alkan","Achtertuin",dl, D(2026,6,12,0,30), D(2026,6,12,3,0)));
+    EVENTS.push(ev("I-f","Achtertuin",dl, D(2026,6,12,3,0), D(2026,6,12,5,0)));
 
   })();
 
-  // ---- Zondag 12 juli 2026 ----
+  // ---- Zondag 12 juli 2026 (festival day: 12:00 - 08:00) ----
   (function(){
     var dl = "12 juli";
 
@@ -1195,10 +1269,24 @@
 
   function renderUndoBar(){ document.getElementById('undo-bar').style.display = entries.length > 0 ? 'flex' : 'none'; }
 
-  // ---------- timetable rendering ----------
+  // ---------- timetable rendering (grid sidescroller + list) ----------
   var activeDay = DAY_LABELS[0];
-  var activeStage = "";
+  var activeStages = []; // empty = all stages
   var searchTerm = "";
+  var ttViewMode = "grid"; // "grid" or "list"
+  var favoritesOnly = false;
+
+  var TT_PX_PER_HOUR = 140;
+  var TT_ROW_H = 56;
+  var TT_DAYROW_H = 22;
+  var TT_HOURROW_H = 30;
+  var TT_HEADER_H = TT_DAYROW_H + TT_HOURROW_H;
+  var TT_STAGE_COL_W = 84;
+
+  // The whole festival as one continuous timeline: Thursday 12:00 -> Sunday close (08:00 Monday).
+  var TT_GLOBAL_START = DAY_START_MAP[DAY_LABELS[0]];
+  var TT_GLOBAL_END = new Date(DAY_START_MAP[DAY_LABELS[DAY_LABELS.length-1]].getTime() + TT_GRID_HOURS*3600000);
+  var TT_TOTAL_HOURS = Math.round((TT_GLOBAL_END - TT_GLOBAL_START) / 3600000);
 
   function renderDayTabs(){
     var el = document.getElementById('day-tabs');
@@ -1207,42 +1295,252 @@
     }).join('');
     el.querySelectorAll('.day-tab').forEach(function(btn){
       btn.addEventListener('click', function(){
-        activeDay = btn.getAttribute('data-day');
-        renderDayTabs();
+        var dl = btn.getAttribute('data-day');
+        if(ttViewMode === 'grid'){
+          scrollGridToDay(dl);
+        } else {
+          activeDay = dl;
+          renderDayTabs();
+          renderEventList();
+        }
+      });
+    });
+  }
+
+  function scrollGridToDay(dl){
+    activeDay = dl;
+    renderDayTabs();
+    var scrollEl = document.getElementById('tt-scroll');
+    if(!scrollEl) return;
+    var offsetH = (DAY_START_MAP[dl] - TT_GLOBAL_START) / 3600000;
+    scrollEl.scrollLeft = Math.max(0, TT_STAGE_COL_W + offsetH*TT_PX_PER_HOUR - 8);
+  }
+
+  function renderStageFilter(){
+    var panel = document.getElementById('stage-filter-panel');
+    var btn = document.getElementById('stage-filter-btn');
+
+    panel.innerHTML = '<label class="stage-filter-option"><input type="checkbox" id="stage-all-cb"'+ (activeStages.length === 0 ? ' checked' : '') +'> Alle podia</label>' +
+      '<div class="stage-filter-divider"></div>' +
+      STAGES.map(function(s){
+        var checked = activeStages.length === 0 || activeStages.indexOf(s) !== -1;
+        return '<label class="stage-filter-option"><input type="checkbox" data-stage="'+ s +'"'+ (checked ? ' checked' : '') +'> '+ s +'</label>';
+      }).join('');
+
+    if(activeStages.length === 0){
+      btn.textContent = 'Alle podia';
+      btn.classList.remove('active');
+    } else if(activeStages.length === 1){
+      btn.textContent = activeStages[0];
+      btn.classList.add('active');
+    } else {
+      btn.textContent = activeStages.length + ' podia geselecteerd';
+      btn.classList.add('active');
+    }
+
+    document.getElementById('stage-all-cb').addEventListener('change', function(e){
+      if(e.target.checked){ activeStages = []; renderStageFilter(); renderEventList(); }
+      else { e.target.checked = true; } // "Alle" can't be unchecked directly, only by picking specific stages
+    });
+    panel.querySelectorAll('[data-stage]').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        var s = cb.getAttribute('data-stage');
+        if(activeStages.length === 0){ activeStages = STAGES.slice(); }
+        if(cb.checked){
+          if(activeStages.indexOf(s) === -1) activeStages.push(s);
+        } else {
+          activeStages = activeStages.filter(function(x){ return x !== s; });
+        }
+        if(activeStages.length === STAGES.length) activeStages = [];
+        renderStageFilter();
         renderEventList();
       });
     });
   }
 
-  function renderStageFilter(){
-    var el = document.getElementById('stage-filter');
-    el.innerHTML = '<option value="">Alle podia</option>' + STAGES.map(function(s){
-      return '<option value="'+ s +'">'+ s +'</option>';
-    }).join('');
-    el.value = activeStage;
+  function toggleStageFilterPanel(show){
+    var panel = document.getElementById('stage-filter-panel');
+    if(show === undefined) show = !panel.classList.contains('open');
+    panel.classList.toggle('open', show);
   }
+  document.getElementById('stage-filter-btn').addEventListener('click', function(e){
+    e.stopPropagation();
+    toggleStageFilterPanel();
+  });
+  document.getElementById('stage-filter-panel').addEventListener('click', function(e){ e.stopPropagation(); });
+  document.addEventListener('click', function(){ toggleStageFilterPanel(false); });
+
+  function setTtViewMode(mode){
+    ttViewMode = mode;
+    document.querySelectorAll('.tt-view-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-view') === mode);
+    });
+    document.getElementById('tt-scroll').style.display = (mode === 'grid') ? 'block' : 'none';
+    document.getElementById('event-list').style.display = (mode === 'list') ? 'block' : 'none';
+    renderEventList();
+  }
+  document.querySelectorAll('.tt-view-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ setTtViewMode(btn.getAttribute('data-view')); });
+  });
 
   function renderEventList(){
+    if(ttViewMode === 'list'){ renderTimetableList(); } else { renderTimetableGrid(); }
+  }
+
+  function renderTimetableGrid(){
+    var scrollEl = document.getElementById('tt-scroll');
+    var inner = document.getElementById('tt-inner');
+    var emptyEl = document.getElementById('event-empty');
+    var n = now();
+
+    var rows = activeStages.length ? STAGES.filter(function(s){ return activeStages.indexOf(s) !== -1; }) : STAGES;
+
+    var allEvents = EVENTS.filter(function(e){
+      if(activeStages.length && activeStages.indexOf(e.stage) === -1) return false;
+      if(favoritesOnly && !isFav(e.id)) return false;
+      return true;
+    });
+
+    var visibleEvents = allEvents.filter(function(e){
+      if(searchTerm && e.artist.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1) return false;
+      return true;
+    });
+
+    if(allEvents.length === 0){
+      inner.innerHTML = '';
+      emptyEl.style.display = 'block';
+      return;
+    }
+    emptyEl.style.display = 'none';
+
+    var gridWidth = TT_STAGE_COL_W + TT_TOTAL_HOURS * TT_PX_PER_HOUR;
+    var gridHeight = TT_HEADER_H + rows.length * TT_ROW_H;
+    var prevScrollLeft = scrollEl.scrollLeft;
+
+    var html = '';
+    html += '<div class="tt-corner" style="width:'+ TT_STAGE_COL_W +'px; height:'+ TT_HEADER_H +'px;"></div>';
+
+    // day-name row + hour row, spanning the full continuous timeline
+    for(var h = 0; h < TT_TOTAL_HOURS; h++){
+      var clockHour = (12 + h) % 24;
+      var label = (clockHour < 10 ? '0'+clockHour : clockHour) + ':00';
+      html += '<div class="tt-hour-label" style="left:'+ (TT_STAGE_COL_W + h*TT_PX_PER_HOUR) +'px; top:'+ TT_DAYROW_H +'px; width:'+ TT_PX_PER_HOUR +'px; height:'+ TT_HOURROW_H +'px;">'+ label +'</div>';
+    }
+    DAY_LABELS.forEach(function(dl, di){
+      var dayOffsetH = (DAY_START_MAP[dl] - TT_GLOBAL_START) / 3600000;
+      var dayWidth = (di < DAY_LABELS.length - 1 ? 24 : (TT_TOTAL_HOURS - dayOffsetH)) * TT_PX_PER_HOUR;
+      html += '<div class="tt-day-label" style="left:'+ (TT_STAGE_COL_W + dayOffsetH*TT_PX_PER_HOUR) +'px; width:'+ dayWidth +'px; height:'+ TT_DAYROW_H +'px;">'+ DAY_NAMES[di] +' '+ dl +'</div>';
+      if(di > 0){
+        html += '<div class="tt-day-divider" style="left:'+ (TT_STAGE_COL_W + dayOffsetH*TT_PX_PER_HOUR) +'px; height:'+ gridHeight +'px;"></div>';
+      }
+    });
+
+    // stage column (sticky)
+    html += '<div class="tt-stagecol" style="width:'+ TT_STAGE_COL_W +'px; top:0;">';
+    html += '<div style="height:'+ TT_HEADER_H +'px; border-right:1px solid var(--line);"></div>';
+    rows.forEach(function(stage){
+      html += '<div class="tt-stage-name" style="height:'+ TT_ROW_H +'px;">'+ stage +'</div>';
+    });
+    html += '</div>';
+
+    // row background stripes + vertical hour gridlines
+    rows.forEach(function(stage, i){
+      html += '<div class="tt-row-bg" style="left:'+ TT_STAGE_COL_W +'px; top:'+ (TT_HEADER_H + i*TT_ROW_H) +'px; width:'+ (TT_TOTAL_HOURS*TT_PX_PER_HOUR) +'px; height:'+ TT_ROW_H +'px;"></div>';
+    });
+    for(var hl = 0; hl <= TT_TOTAL_HOURS; hl++){
+      html += '<div class="tt-hour-line" style="left:'+ (TT_STAGE_COL_W + hl*TT_PX_PER_HOUR) +'px; height:'+ (gridHeight - TT_HEADER_H) +'px; top:'+ TT_HEADER_H +'px;"></div>';
+    }
+
+    // events, positioned by elapsed hours since the global start (Thursday 12:00)
+    visibleEvents.forEach(function(e){
+      var rowIndex = rows.indexOf(e.stage);
+      if(rowIndex === -1) return;
+      var startOffsetH = (e.start - TT_GLOBAL_START) / 3600000;
+      var durH = (e.end - e.start) / 3600000;
+      var left = TT_STAGE_COL_W + startOffsetH * TT_PX_PER_HOUR;
+      var width = Math.max(durH * TT_PX_PER_HOUR - 4, 40);
+      var top = TT_HEADER_H + rowIndex * TT_ROW_H + 3;
+      var height = TT_ROW_H - 6;
+      var live = e.start <= n && n < e.end;
+      var fav = isFav(e.id);
+      html += '<div class="tt-event'+ (fav?' is-fav':'') + (live?' is-live':'') +'" data-fav="'+ e.id +'" style="left:'+ left +'px; top:'+ top +'px; width:'+ width +'px; height:'+ height +'px;">' +
+        (fav ? '<span class="tt-fav-badge">★</span>' : '') +
+        '<div class="tt-ev-time">'+ fmtClock(e.start) +'</div>' +
+        '<div class="tt-ev-artist">'+ e.artist +'</div>' +
+      '</div>';
+    });
+
+    // now line (only if "now" falls within the festival's overall timeline)
+    if(n >= TT_GLOBAL_START && n < TT_GLOBAL_END){
+      var nowOffsetH = (n - TT_GLOBAL_START) / 3600000;
+      var nowLeft = TT_STAGE_COL_W + nowOffsetH * TT_PX_PER_HOUR;
+      html += '<div class="tt-now-line" style="left:'+ nowLeft +'px; height:'+ gridHeight +'px;"><div class="tt-now-dot"></div></div>';
+    }
+
+    inner.style.width = gridWidth + 'px';
+    inner.style.height = gridHeight + 'px';
+    inner.innerHTML = html;
+    scrollEl.scrollLeft = prevScrollLeft;
+
+    inner.querySelectorAll('[data-fav]').forEach(function(el){
+      el.addEventListener('click', function(){
+        toggleFav(el.getAttribute('data-fav'));
+        renderEventList();
+        renderNextFav();
+      });
+    });
+  }
+
+  // Highlight the day tab matching whatever part of the continuous timeline is in view.
+  var ttScrollSpyTicking = false;
+  document.getElementById('tt-scroll').addEventListener('scroll', function(){
+    if(ttViewMode !== 'grid' || ttScrollSpyTicking) return;
+    ttScrollSpyTicking = true;
+    requestAnimationFrame(function(){
+      var scrollEl = document.getElementById('tt-scroll');
+      var centerH = (scrollEl.scrollLeft + scrollEl.clientWidth*0.3 - TT_STAGE_COL_W) / TT_PX_PER_HOUR;
+      var centerTime = new Date(TT_GLOBAL_START.getTime() + centerH*3600000);
+      var nearest = DAY_LABELS[0];
+      DAY_LABELS.forEach(function(dl){
+        if(centerTime >= DAY_START_MAP[dl]) nearest = dl;
+      });
+      if(nearest !== activeDay){
+        activeDay = nearest;
+        renderDayTabs();
+      }
+      ttScrollSpyTicking = false;
+    });
+  });
+
+  function renderTimetableList(){
     var el = document.getElementById('event-list');
     var emptyEl = document.getElementById('event-empty');
     var n = now();
 
     var filtered = EVENTS.filter(function(e){
-      if(e.dayLabel !== activeDay) return false;
-      if(activeStage && e.stage !== activeStage) return false;
+      if(!favoritesOnly && e.dayLabel !== activeDay) return false;
+      if(favoritesOnly && !isFav(e.id)) return false;
+      if(activeStages.length && activeStages.indexOf(e.stage) === -1) return false;
       if(searchTerm && e.artist.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1) return false;
       return true;
-    });
+    }).sort(function(a,b){ return a.start - b.start; });
 
-    if(filtered.length === 0){ el.innerHTML=''; emptyEl.style.display='block'; return; }
+    if(filtered.length === 0){
+      el.innerHTML='';
+      emptyEl.textContent = favoritesOnly ? 'Nog geen favorieten gekozen.' : 'Geen acts gevonden voor dit filter.';
+      emptyEl.style.display='block';
+      return;
+    }
     emptyEl.style.display='none';
+    emptyEl.textContent = 'Geen acts gevonden voor dit filter.';
 
     el.innerHTML = filtered.map(function(e){
       var live = e.start <= n && n < e.end;
       var fav = isFav(e.id);
-      return '<div class="event-card'+ (fav?' is-fav':'') +'">' +
+      var stageLine = favoritesOnly ? (e.stage +' · '+ e.dayLabel) : e.stage;
+      return '<div class="event-card'+ (fav?' is-fav':'') +'" data-list-fav="'+ e.id +'">' +
         '<div class="time-col">'+ fmtClock(e.start) +'<div class="end">'+ fmtClock(e.end) +'</div></div>' +
-        '<div class="info"><div class="artist">'+ e.artist + (live?'<span class="live-tag">Nu bezig</span>':'') +'</div><div class="stage">'+ e.stage +'</div></div>' +
+        '<div class="info"><div class="artist">'+ e.artist + (live?'<span class="live-tag">Nu bezig</span>':'') +'</div><div class="stage">'+ stageLine +'</div></div>' +
         '<button class="star-toggle'+ (fav?' active':'') +'" data-fav="'+ e.id +'">'+ (fav?'★':'☆') +'</button>' +
       '</div>';
     }).join('');
@@ -1256,11 +1554,57 @@
     });
   }
 
-  document.getElementById('stage-filter').addEventListener('change', function(e){
-    activeStage = e.target.value; renderEventList();
-  });
+  function jumpToTimetableNow(){
+    var n = now();
+    var targetLabel = null;
+    var globalOffsetH;
+
+    if(n >= TT_GLOBAL_START && n < TT_GLOBAL_END){
+      globalOffsetH = (n - TT_GLOBAL_START) / 3600000;
+    } else if(n < TT_GLOBAL_START){
+      globalOffsetH = 0;
+    } else {
+      globalOffsetH = TT_TOTAL_HOURS;
+    }
+
+    for(var i = DAY_LABELS.length - 1; i >= 0; i--){
+      var dl = DAY_LABELS[i];
+      if(n >= DAY_START_MAP[dl] || i === 0){ targetLabel = dl; break; }
+    }
+
+    activeDay = targetLabel;
+    renderDayTabs();
+    renderEventList();
+
+    if(ttViewMode === 'grid'){
+      requestAnimationFrame(function(){
+        var scrollEl = document.getElementById('tt-scroll');
+        if(!scrollEl) return;
+        var target = Math.max(0, TT_STAGE_COL_W + globalOffsetH*TT_PX_PER_HOUR - scrollEl.clientWidth*0.3);
+        scrollEl.scrollLeft = target;
+      });
+    } else {
+      requestAnimationFrame(function(){
+        var n2 = now();
+        var cards = document.querySelectorAll('#event-list .event-card');
+        var target = null;
+        var dayStart = DAY_START_MAP[targetLabel];
+        var dayEvents = EVENTS.filter(function(e){ return e.dayLabel === targetLabel; }).sort(function(a,b){ return a.start-b.start; });
+        var idx = dayEvents.findIndex(function(e){ return e.end > n2; });
+        if(idx === -1) idx = dayEvents.length - 1;
+        if(cards[idx]) cards[idx].scrollIntoView({ block: 'center', behavior: 'auto' });
+      });
+    }
+  }
+
   document.getElementById('artist-search').addEventListener('input', function(e){
     searchTerm = e.target.value; renderEventList();
+  });
+  document.getElementById('fav-filter-btn').addEventListener('click', function(){
+    favoritesOnly = !favoritesOnly;
+    this.classList.toggle('active', favoritesOnly);
+    document.getElementById('day-tabs').style.display = favoritesOnly ? 'none' : 'flex';
+    if(favoritesOnly && ttViewMode !== 'list'){ setTtViewMode('list'); } else { renderEventList(); }
   });
 
   // ---------- render all ----------
@@ -1339,6 +1683,7 @@
     document.querySelectorAll('nav.bottom button').forEach(function(b){
       b.classList.toggle('active', b.getAttribute('data-screen') === name);
     });
+    if(name === 'timetable'){ jumpToTimetableNow(); }
   }
   document.querySelectorAll('nav.bottom button').forEach(function(b){
     b.addEventListener('click', function(){ showScreen(b.getAttribute('data-screen')); });
